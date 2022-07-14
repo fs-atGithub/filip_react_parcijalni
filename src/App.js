@@ -73,28 +73,28 @@ function App() {
           <h1>{error}</h1>
         ) : (
           <section>
-            <div class="card">
+            <div className="card">
               <img src={avatar} alt={name} />
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{name}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{userName}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{followers}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{following}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{repos}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{location}</h2>
             </div>
-            <div class="card">
+            <div className="card">
               <h2>{bio}</h2>
             </div>
           </section>
