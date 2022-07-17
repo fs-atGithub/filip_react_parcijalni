@@ -21,14 +21,7 @@ function App() {
       });
   }, []);
 
-  const setData = ({
-    name,
-
-    public_repos,
-    avatar_url,
-    location,
-    bio,
-  }) => {
+  const setData = ({ name, public_repos, avatar_url, location, bio }) => {
     setName(name);
 
     setRepos(public_repos);
@@ -59,7 +52,7 @@ function App() {
           <Form.Group>
             <Form.Input
               placeholder="username"
-              name="github user"
+              name="search_input"
               onChange={handleSearch}
             />
             <Form.Button content="Search" />
@@ -71,7 +64,7 @@ function App() {
       ) : (
         <div className="card">
           <Card>
-            <Image src={avatar} wrapped ui={false} />
+            <Image src={avatar} />
             <Card.Content extra>
               <p>
                 <Icon name="user" /> name: {name}
