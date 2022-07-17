@@ -4,38 +4,33 @@ import { Form, Card, Image, Icon } from "semantic-ui-react";
 import "./App.css";
 
 function App() {
-  const [name, setName] = useState("");
-  const [userName, setUsername] = useState("");
-  const [followers, setFollowers] = useState("");
-  const [following, setFollowing] = useState("");
-  const [repos, setRepos] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [userInput, setUserInput] = useState("");
-  const [error, setError] = useState(null);
+  const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [bio, setBio] = useState("");
+  const [repos, setRepos] = useState("");
+  const [userInput, setUserInput] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/facebook")
+    fetch("https://api.github.com/users/dstrekelj")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setData(data);
       });
   }, []);
 
   const setData = ({
-    login,
-    followers,
-    following,
+    name,
+
     public_repos,
     avatar_url,
     location,
     bio,
   }) => {
     setName(name);
-    setUsername(login);
-    setFollowers(followers);
-    setFollowing(following);
+
     setRepos(public_repos);
     setAvatar(avatar_url);
     setLocation(location);
@@ -78,28 +73,19 @@ function App() {
           <Card>
             <Image src={avatar} wrapped ui={false} />
             <Card.Content extra>
-              <Card.Header>{name}</Card.Header>
-              <Card.Header>{userName}</Card.Header>
               <p>
-                <Icon name="user" /> {name} name
-              </p>
-              <p>
-                <Icon name="user" /> {location} location
-              </p>
-              <p>
-                <Icon name="user" /> {following} following
-              </p>
-              <p>
-                <Icon name="user" /> {followers} followers
-              </p>
-              <p>
-                <Icon name="user" /> {repos} repos
-              </p>
-              <p>
-                <Icon name="user" /> {bio} bio
+                <Icon name="user" /> name: {name}
               </p>
 
-              <Icon name="user" />
+              <p>
+                <Icon name="user" /> repos: {repos}
+              </p>
+              <p>
+                <Icon name="user" /> bio: {bio}
+              </p>
+              <div>
+                <Icon name="user" /> location: {location}
+              </div>
             </Card.Content>
           </Card>
         </div>
