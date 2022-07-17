@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, Card, Image, Icon } from "semantic-ui-react";
 
 import "./App.css";
 
@@ -15,10 +16,9 @@ function App() {
   const [bio, setBio] = useState("");
 
   useEffect(() => {
-    fetch("https://api.github.com/users/example/")
+    fetch("https://api.github.com/users/facebook")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
       });
   }, []);
@@ -44,9 +44,8 @@ function App() {
   const handleSearch = (e) => {
     setUserInput(e.target.value);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch(`https://api.github.com/users/${userInput}/`)
+  const handleSubmit = () => {
+    fetch(`https://api.github.com/users/${userInput}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {
@@ -58,48 +57,53 @@ function App() {
       });
   };
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit} className="search">
-        <input
-          class="input"
-          type="text"
-          placeholder="Search"
-          name="github user"
-          onChange={handleSearch}
-          required
-        />
-        <button>Search</button>
-        {error ? (
-          <h1>{error}</h1>
-        ) : (
-          <section>
-            <div className="card">
-              <img src={avatar} alt={name} />
-            </div>
-            <div className="card">
-              <h2>{name}</h2>
-            </div>
-            <div className="card">
-              <h2>{userName}</h2>
-            </div>
-            <div className="card">
-              <h2>{followers}</h2>
-            </div>
-            <div className="card">
-              <h2>{following}</h2>
-            </div>
-            <div className="card">
-              <h2>{repos}</h2>
-            </div>
-            <div className="card">
-              <h2>{location}</h2>
-            </div>
-            <div className="card">
-              <h2>{bio}</h2>
-            </div>
-          </section>
-        )}
-      </form>
+    <div>
+      <div className="navbar">Github Search</div>
+      <div className="search">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Input
+              placeholder="username"
+              name="github user"
+              onChange={handleSearch}
+            />
+            <Form.Button content="Search" />
+          </Form.Group>
+        </Form>
+      </div>
+      {error ? (
+        <h1>{error}</h1>
+      ) : (
+        <div className="card">
+          <Card>
+            <Image src={avatar} wrapped ui={false} />
+            <Card.Content extra>
+              <Card.Header>{name}</Card.Header>
+              <Card.Header>{userName}</Card.Header>
+              <p>
+                <Icon name="user" /> {name} name
+              </p>
+              <p>
+                <Icon name="user" /> {location} location
+              </p>
+              <p>
+                <Icon name="user" /> {following} following
+              </p>
+              <p>
+                <Icon name="user" /> {followers} followers
+              </p>
+              <p>
+                <Icon name="user" /> {repos} repos
+              </p>
+              <p>
+                <Icon name="user" /> {bio} bio
+              </p>
+
+              <Icon name="user" />
+            </Card.Content>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
